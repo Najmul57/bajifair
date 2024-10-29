@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('master_agents', function (Blueprint $table) {
+        Schema::create('customers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('superagent_id');
-            $table->string('master_agent_id',50);
-            $table->string('master_agent_name',100);
+            $table->string('name',100);
             $table->string('whatsapp',15);
             $table->timestamps();
         });
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('master_agents');
+        Schema::dropIfExists('customers');
     }
 };
