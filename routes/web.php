@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Backend\CustomerServiceController;
+use App\Http\Controllers\Backend\MasterAgentController;
 use App\Http\Controllers\Backend\QuickMasterController;
 use App\Http\Controllers\Backend\SubAdminController;
+use App\Http\Controllers\Backend\SuperAgentController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -48,6 +51,34 @@ Route::controller(SubAdminController::class)->group(function () {
     Route::put('/subadmin/update/{subadmin}', 'update')->name('subadmin.update');
     Route::get('/subadmin/destroy/{subadmin}', 'destroy')->name('subadmin.destroy');
 });
+
+//quick master
+Route::controller(SuperAgentController::class)->group(function () {
+    Route::get('/super-agent', 'index')->name('super.agent');
+    Route::post('/super-agent/store', 'store')->name('super-agent.store');
+    Route::get('/super-agent/edit/{superAgent}', 'edit')->name('super-agent.edit');
+    Route::put('/super-agent/update/{superAgent}', 'update')->name('super-agent.update');
+    Route::get('/super-agent/destroy/{superAgent}', 'destroy')->name('super-agent.destroy');
+});
+
+//quick master
+Route::controller(MasterAgentController::class)->group(function () {
+    Route::get('/master-agent', 'index')->name('master.agent');
+    Route::post('/master-agent/store', 'store')->name('master-agent.store');
+    Route::get('/master-agent/edit/{masterAgent}', 'edit')->name('master-agent.edit');
+    Route::put('/master-agent/update/{masterAgent}', 'update')->name('master-agent.update');
+    Route::get('/master-agent/destroy/{masterAgent}', 'destroy')->name('master-agent.destroy');
+});
+
+//quick master
+Route::controller(CustomerServiceController::class)->group(function () {
+    Route::get('/customer', 'index')->name('customer');
+    Route::post('/customer/store', 'store')->name('customer.store');
+    Route::get('/customer/edit/{customer}', 'edit')->name('customer.edit');
+    Route::put('/customer/update/{customer}', 'update')->name('customer.update');
+    Route::get('/customer/destroy/{customer}', 'destroy')->name('customer.destroy');
+});
+
 
 
 Route::middleware('auth')->group(function () {

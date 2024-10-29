@@ -38,17 +38,17 @@
           </a>
         </li>
         <li class="treeview">
-          <a href="#">
+          <a href="{{route('super.agent')}}">
             <i class="fa fa-users"></i> <span>Super Agent List</span>
           </a>
         </li>
         <li class="treeview">
-          <a href="#">
+          <a href="{{route('master.agent')}}">
             <i class="fa fa-users"></i> <span>Master Agent List</span>
           </a>
         </li>
         <li class="treeview">
-          <a href="#">
+          <a href="{{route('customer')}}">
             <i class="fa fa-users"></i> <span>Customer Service List</span>
           </a>
         </li>
