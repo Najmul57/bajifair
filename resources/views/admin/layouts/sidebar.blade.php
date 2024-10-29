@@ -53,7 +53,7 @@
           </a>
         </li>
         <li class="treeview">
-          <a href="#">
+          <a href="{{route('setting')}}">
             <i class="fa fa-gear"></i> <span>Site Settings</span>
           </a>
         </li>

@@ -4,6 +4,7 @@ use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\CustomerServiceController;
 use App\Http\Controllers\Backend\MasterAgentController;
 use App\Http\Controllers\Backend\QuickMasterController;
+use App\Http\Controllers\Backend\SettingsController;
 use App\Http\Controllers\Backend\SubAdminController;
 use App\Http\Controllers\Backend\SuperAgentController;
 use App\Http\Controllers\ProfileController;
@@ -79,7 +80,11 @@ Route::controller(CustomerServiceController::class)->group(function () {
     Route::get('/customer/destroy/{customer}', 'destroy')->name('customer.destroy');
 });
 
-
+//setting
+Route::controller(SettingsController::class)->group(function () {
+    Route::get('/setting', 'index')->name('setting');
+    Route::put('/setting/update/{setting}', 'update')->name('setting.update');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
