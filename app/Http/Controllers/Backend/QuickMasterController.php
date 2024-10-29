@@ -18,51 +18,53 @@ class QuickMasterController extends Controller
 
     public function index()
     {
-        $data = $this->quickMaster::latest()->get();
+        $data = $this->quickMaster::select('master_id', 'whatsapp','id')->latest()->get();
+    
         return view('admin.pages.quick-master.index', compact('data'));
     }
-
+    
     public function store(Request $request)
     {
         $request->validate([
-            'master_id' => 'required|numeric',
-            'whatsapp' => 'required|numeric',
+            'master_id' => 'required|numeric|unique:quick_masters,master_id',
+            'whatsapp' => 'required|numeric|unique:quick_masters,whatsapp',
         ]);
-
+    
         $data = $this->quickMaster::create([
             'master_id' => $request->master_id,
             'whatsapp' => $request->whatsapp,
         ]);
-
+    
         return redirect()->back()->with('success', 'Record created successfully!');
     }
+    
 
-    public function edit($id)
+    public function edit(QuickMaster $quickMaster)
     {
-        $data = $this->quickMaster::findOrFail($id);
-        return response()->json($data);
+        return response()->json($quickMaster);
     }
-
-    public function update(Request $request, $id)
+    
+    public function update(Request $request, QuickMaster $quickMaster)
     {
         $request->validate([
-            'master_id' => 'required|numeric',
-            'whatsapp' => 'required|numeric',
+            'master_id' => 'required|numeric|unique:quick_masters,master_id,' . $quickMaster->id,
+            'whatsapp' => 'required|numeric|unique:quick_masters,whatsapp,' . $quickMaster->id,
         ]);
-
-        $data = $this->quickMaster::findOrFail($id);
-        $data->update([
+    
+        $quickMaster->update([
             'master_id' => $request->master_id,
             'whatsapp' => $request->whatsapp,
         ]);
-
+    
         return redirect()->back()->with('success', 'Record updated successfully!');
     }
-
+    
+    
 
     public function destroy(QuickMaster $quickMaster)
     {
         $quickMaster->delete();
-        return redirect()->back()->with('status', 'Record deleted successfully!');
-    }
+        return redirect()->back()->with('success', 'Record deleted successfully!');
+    }    
+    
 }

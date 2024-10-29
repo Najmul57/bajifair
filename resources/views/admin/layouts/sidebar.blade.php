@@ -23,12 +23,12 @@
           </a>
         </li>
         <li class="treeview">
-          <a href="{{route('admin.quick.index')}}">
+          <a href="{{route('quick.master')}}">
             <i class="fa fa-users"></i> <span>Quick Master List</span>
           </a>
         </li>
         <li class="treeview">
-          <a href="#">
+          <a href="">
             <i class="fa fa-users"></i> <span>Admin List</span>
           </a>
         </li>
