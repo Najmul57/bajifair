@@ -7,13 +7,14 @@ use App\Http\Controllers\Backend\QuickMasterController;
 use App\Http\Controllers\Backend\SettingsController;
 use App\Http\Controllers\Backend\SubAdminController;
 use App\Http\Controllers\Backend\SuperAgentController;
+use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', function () {
-    // return view('welcome');
+Route::get('/',function(){
+    
     return view('frontend.home');
 });
 

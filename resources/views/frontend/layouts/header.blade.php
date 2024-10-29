@@ -24,7 +24,7 @@
                         <nav>
                             <div class="main_menu d-flex justify-content-center">
                                 <ul class="d-flex gap-3">
-                                    <li><a href="index.html"><i class="fa fa-home"></i> Home</a></li>
+                                    <li><a href="{{url('/')}}"><i class="fa fa-home"></i> Home</a></li>
                                     <li><a href="admin.html"><i class="fa fa-user"></i> Admin</a></li>
                                     <li><a href="subadmin.html"><i class="fa fa-user"></i> Sub Admin</a></li>
                                     <li><a href="super.html"><i class="fa fa-user"></i> Super</a></li>

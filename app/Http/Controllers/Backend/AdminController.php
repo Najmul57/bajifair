@@ -66,4 +66,5 @@ class AdminController extends Controller
         $admin->delete();
         return redirect()->back()->with('success', 'Record deleted successfully!');
     }    
+    
 }
