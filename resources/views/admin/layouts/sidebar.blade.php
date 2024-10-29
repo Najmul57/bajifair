@@ -28,13 +28,13 @@
           </a>
         </li>
         <li class="treeview">
-          <a href="">
+          <a href="{{route('admin')}}">
             <i class="fa fa-users"></i> <span>Admin List</span>
           </a>
         </li>
         <li class="treeview">
-          <a href="#">
-            <i class="fa fa-users"></i> <span>Super Admin List</span>
+          <a href="{{route('subadmin')}}">
+            <i class="fa fa-users"></i> <span>Sub Admin List</span>
           </a>
         </li>
         <li class="treeview">
