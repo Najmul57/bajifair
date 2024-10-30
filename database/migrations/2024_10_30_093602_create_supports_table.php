@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('subadmins', function (Blueprint $table) {
+        Schema::create('supports', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('admin_id');
-            $table->string('sub_admin',100);
+            $table->string('name',100);
             $table->string('whatsapp',15);
             $table->timestamps();
         });
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('subadmins');
+        Schema::dropIfExists('supports');
     }
 };

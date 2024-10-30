@@ -16,4 +16,9 @@ class SuperAgent extends Model
     {
         return $this->belongsTo(Admin::class, 'admin_id');
     }
+
+    public function masterAgents()
+    {
+        return $this->hasMany(MasterAgent::class, 'superagent_id');
+    }
 }

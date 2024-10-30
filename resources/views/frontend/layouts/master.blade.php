@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BajiFair</title>
+    <title>{{ $setting->title }}</title>
+    <link rel="icon" href="{{ asset('upload/logo/' . $setting->favicon) }}" type="image/png">
     <link href="{{ asset('frontend') }}/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
     <link rel="stylesheet" href="{{ asset('frontend') }}/css/style.css">
@@ -22,13 +23,13 @@
     <!-- main content start -->
     <main>
 
-@yield('frontend')
+        @yield('frontend')
 
     </main>
     <!-- main content end -->
 
     <!-- footer start -->
-@include('frontend.layouts.footer')
+    @include('frontend.layouts.footer')
     <!-- footer end -->
 
 

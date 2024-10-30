@@ -14,17 +14,17 @@
                                     </div>
                                     <div class="card-body d-flex align-items-center justify-content-between">
                                         <h6>Master Agent</h6>
-                                        <div class="agent_id">ID : 106</div>
+                                        <div class="agent_id">ID : {{$quickmaster->master_id ?? ''}}</div>
                                         <div class="agent_number">
-                                            971565908370 <br>
+                                            {{$quickmaster->whatsapp ?? ''}} <br>
                                             <div class="text-center">
                                                 <span>WhatsApp</span>
                                             </div>
                                         </div>
                                         <div class="agent_btn">
                                             <button class="btn btn-sm"><a class="text-white"
-                                                    href="https://wa.me/+8801937563157"
-                                                    title="WhatsApp : +8801937563157"
+                                                    href="https://wa.me/+{{$quickmaster->whatsapp ?? ''}}"
+                                                    title="WhatsApp : +{{$quickmaster->whatsapp ?? ''}}"
                                                     target="_blank">Message</a></button>
                                             <button class="btn btn-sm btn-danger">Report</button>
                                         </div>
@@ -55,21 +55,21 @@
                                             <p>সুপার এজেন্ট রা, ইউজার একাউন্ট এবং মাষ্টার এজেন্ট একাউন্ট খুলে দিতে
                                                 পারেন। কোন সুপার এজেন্ট এর নামে অভিযোগ থাকলে সরাসরি এডমিন কে জানাতে হবে।
                                             </p>
-                                            <a href="super.html" class="btn btn-sm  btn-danger">Report</a>
+                                            <a href="{{route('super.frontend')}}" class="btn btn-sm  btn-danger">Report</a>
                                         </div>
                                         <div class="single_agent text-center">
                                             <h6>অনলাইন মাষ্টার এজেন্ট লিস্টঃ</h6>
                                             <p>সুপার এজেন্ট রা, ইউজার একাউন্ট এবং মাষ্টার এজেন্ট একাউন্ট খুলে দিতে
                                                 পারেন। কোন সুপার এজেন্ট এর নামে অভিযোগ থাকলে সরাসরি এডমিন কে জানাতে হবে।
                                             </p>
-                                            <a href="master.html" class="btn btn-sm btn-danger ">Report</a>
+                                            <a href="{{route('master.frontend')}}" class="btn btn-sm btn-danger ">Report</a>
                                         </div>
                                         <div class="single_agent text-center">
                                             <h6>লোকাল সুপার এজেন্ট লিস্টঃ</h6>
                                             <p>সুপার এজেন্ট রা, ইউজার একাউন্ট এবং মাষ্টার এজেন্ট একাউন্ট খুলে দিতে
                                                 পারেন। কোন সুপার এজেন্ট এর নামে অভিযোগ থাকলে সরাসরি এডমিন কে জানাতে হবে।
                                             </p>
-                                            <a href="admin.html" class="btn btn-sm btn-danger ">Report</a>
+                                            <a href="{{route('admin.frontend')}}" class="btn btn-sm btn-danger ">Report</a>
                                         </div>
                                     </div>
                                 </div>

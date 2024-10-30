@@ -34,12 +34,44 @@
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="{{ asset('backend') }}/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
+
+    <style>
+        span.logo-lg img {
+            height: 40px;
+        }
+
+        .user-panel.bajifair {
+            position: static;
+        }
+
+
+        .user-panel.bajifair .pull-left.info {
+            padding: 0;
+            font-size: 20px;
+        }
+
+        .user-panel.bajifair .pull-left.info p {
+            margin-bottom: 0;
+            font-size: 22px;
+        }
+
+        @media (max-width: 768px) {
+            span.logo-lg img {
+                width: auto;
+                height: 40px;
+            }
+        }
+        .navbar-nav>.user-menu>.dropdown-menu>.user-footer {
+    background-color: #ECF0F5 !important;
+    padding: 10px;
+    border: 2px solid transparent !important;
+}
+        .small-box>.small-box-footer {
+            font-size: 18px !important;
+        }
+    </style>
+
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -98,6 +130,33 @@
     <!-- AdminLTE for demo purposes -->
     <script src="{{ asset('backend') }}/dist/js/demo.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        @if (Session::has('message'))
+            var type = "{{ Session::get('alert-type', 'info') }}"
+            toastr.options = {
+                "progressBar": true,
+                "closeButton": true,
+            }
+            switch (type) {
+                case 'info':
+                    toastr.info(" {{ Session::get('message') }} ");
+                    break;
+
+                case 'success':
+                    toastr.success(" {{ Session::get('message') }} ");
+                    break;
+
+                case 'warning':
+                    toastr.warning(" {{ Session::get('message') }} ");
+                    break;
+
+                case 'error':
+                    toastr.error(" {{ Session::get('message') }} ");
+                    break;
+            }
+        @endif
+    </script>
 
 
 

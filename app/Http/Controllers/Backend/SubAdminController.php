@@ -47,7 +47,11 @@ class SubAdminController extends Controller
             'whatsapp' => $request->whatsapp,
         ]);
     
-        return redirect()->back()->with('success', 'Record created successfully!');
+        $notification = [
+            'message' => 'Sub Admin Insert Success!',
+            'alert-type' => 'success'
+        ];
+        return redirect()->back()->with($notification);
     }
     
 
@@ -73,7 +77,11 @@ class SubAdminController extends Controller
             'whatsapp' => $request->whatsapp,
         ]);
     
-        return redirect()->back()->with('success', 'Sub Admin updated successfully!');
+        $notification = [
+            'message' => 'Sub Admin Update Success!',
+            'alert-type' => 'success'
+        ];
+        return redirect()->back()->with($notification);
     }
     
     
@@ -81,6 +89,12 @@ class SubAdminController extends Controller
     public function destroy(Subadmin $subadmin)
     {
         $subadmin->delete();
-        return redirect()->back()->with('success', 'Record deleted successfully!');
+        
+        
+        $notification = [
+            'message' => 'Sub Admin Delete Success!',
+            'alert-type' => 'success'
+        ];
+        return redirect()->back()->with($notification);
     }    
 }

@@ -10,7 +10,31 @@
             opacity: 1;
             font-size: 30px;
         }
+
+        div#error-alert {
+            text-align: center;
+            width: 400px;
+            margin-bottom: 0;
+            position: relative;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+
+        div#error-alert ul li {
+            list-style: none;
+        }
     </style>
+
+    @if ($errors->any())
+        <div class="alert alert-danger" id="error-alert">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
     <div class="page_header" style="display: flex; align-items: center;justify-content: space-between;">
         <h2>Quick Master List</h2>
@@ -67,16 +91,17 @@
                                         @method('PUT') <!-- Method spoofing for PUT -->
                                         <div class="form-group">
                                             <label for="id">Quick Master ID</label>
-                                            <input type="number" id="id" name="master_id" class="form-control" required value="{{ $item->master_id }}">
+                                            <input type="number" id="id" name="master_id" class="form-control"
+                                                required value="{{ $item->master_id }}">
                                         </div>
                                         <div class="form-group">
                                             <label for="whatsapp">Whatsapp Number</label>
-                                            <input type="number" name="whatsapp" id="whatsapp" class="form-control" required value="{{ $item->whatsapp }}">
+                                            <input type="number" name="whatsapp" id="whatsapp" minlength="11" class="form-control" required value="{{ $item->whatsapp }}">
                                         </div>
                                         <div style="text-align: end">
                                             <button type="submit" class="btn btn-success">Update</button>
                                         </div>
-                                    </form>                                    
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -107,8 +132,8 @@
                         </div>
                         <div class="form-group">
                             <label for="whatsapp">Whatsapp Number</label>
-                            <input type="number" name="whatsapp" id="whatsapp" class="form-control" required
-                                placeholder="Whatsapp Number">
+                            <input type="text" name="whatsapp" id="whatsapp" class="form-control"
+                                placeholder="WhatsApp Number" minlength="11"  required>
                         </div>
                         <div style="text-align: end">
                             <button type="submit" class="btn btn-success">Submit</button>
@@ -118,4 +143,13 @@
             </div>
         </div>
     </div>
+
+    <script>
+        setTimeout(function() {
+            var errorAlert = document.getElementById('error-alert');
+            if (errorAlert) {
+                errorAlert.style.display = 'none';
+            }
+        }, 4000);
+    </script>
 @endsection

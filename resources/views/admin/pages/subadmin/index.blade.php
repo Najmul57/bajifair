@@ -1,16 +1,40 @@
 @extends('admin.layouts.master')
 
 @section('admin_content')
-    <style>
-        button.close span {
-            color: #00A551;
-        }
+<style>
+    button.close span {
+        color: #00A551;
+    }
 
-        button.close {
-            opacity: 1;
-            font-size: 30px;
-        }
-    </style>
+    button.close {
+        opacity: 1;
+        font-size: 30px;
+    }
+
+    div#error-alert {
+        text-align: center;
+        width: 400px;
+        margin-bottom: 0;
+        position: relative;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+
+    div#error-alert ul li {
+        list-style: none;
+    }
+</style>
+
+@if ($errors->any())
+    <div class="alert alert-danger" id="error-alert">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
     <div class="page_header" style="display: flex; align-items: center;justify-content: space-between;">
         <h2>Sub Admin List</h2>
@@ -146,4 +170,13 @@
             </div>
         </div>
     </div>
+
+    <script>
+        setTimeout(function() {
+            var errorAlert = document.getElementById('error-alert');
+            if (errorAlert) {
+                errorAlert.style.display = 'none';
+            }
+        }, 4000);
+    </script>
 @endsection

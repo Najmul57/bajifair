@@ -34,7 +34,11 @@ class AdminController extends Controller
             'whatsapp' => $request->whatsapp,
         ]);
     
-        return redirect()->back()->with('success', 'Record created successfully!');
+        $notification = [
+            'message' => 'Admin Insert Success!',
+            'alert-type' => 'success'
+        ];
+        return redirect()->back()->with($notification);
     }
     
 
@@ -56,15 +60,38 @@ class AdminController extends Controller
             'whatsapp' => $request->whatsapp,
         ]);
     
-        return redirect()->back()->with('success', 'Record updated successfully!');
+        $notification = [
+            'message' => 'Admin Update Success!',
+            'alert-type' => 'success'
+        ];
+        return redirect()->back()->with($notification);
     }
-    
     
 
     public function destroy(Admin $admin)
     {
+        if ($admin->subadmins()->exists()) {
+            return redirect()->back()->with([
+                'message' => 'Cannot delete this admin as they have associated sub-admins.',
+                'alert-type' => 'error'
+            ]);
+        }
+    
+        if ($admin->superagents()->exists()) {
+            return redirect()->back()->with([
+                'message' => 'Cannot delete this admin as they have associated super agents.',
+                'alert-type' => 'error'
+            ]);
+        }
+    
         $admin->delete();
-        return redirect()->back()->with('success', 'Record deleted successfully!');
-    }    
+        
+        return redirect()->back()->with([
+            'message' => 'Admin deleted successfully!',
+            'alert-type' => 'success'
+        ]);
+    }
+    
+      
     
 }

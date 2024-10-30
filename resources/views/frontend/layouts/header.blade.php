@@ -4,9 +4,7 @@
             <div class="container">
                 <h6 class="rules"><b> Notice</b></h6>
                 <div>
-                    <marquee behavior="" direction="">সাইটের RULES না পড়ে কেউ এজেন্ট হবেন না,রুলসের বাইরে কোন কাজ
-                        করলে সেটার দায়ভার আপনাকে বহন করতে হবেই,তখন অজুহাত দেখিয়ে কোন লাভ হবে না। লিস্টের বাইরে
-                        লেনদেন করে ধরা খেলে, BAJIFAIR দায়ি নয়</marquee>
+                    <marquee behavior="" direction="">{{ $setting->notice }}</marquee>
                 </div>
             </div>
         </div>
@@ -16,7 +14,8 @@
                     <div class="col-lg-2 col-4">
                         <div class="logo">
                             <a href="{{url('/')}}">
-                                <img src="{{asset('frontend')}}/images/logo.png" alt="logo">
+                                {{-- <img src="{{asset('frontend')}}/images/logo.png" alt="logo"> --}}
+                                <img src="{{ asset('upload/logo/' . $setting->logo) }}" alt="" />
                             </a>
                         </div>
                     </div>
@@ -25,11 +24,11 @@
                             <div class="main_menu d-flex justify-content-center">
                                 <ul class="d-flex gap-3">
                                     <li><a href="{{url('/')}}"><i class="fa fa-home"></i> Home</a></li>
-                                    <li><a href="admin.html"><i class="fa fa-user"></i> Admin</a></li>
-                                    <li><a href="subadmin.html"><i class="fa fa-user"></i> Sub Admin</a></li>
-                                    <li><a href="super.html"><i class="fa fa-user"></i> Super</a></li>
-                                    <li><a href="master.html"><i class="fa fa-user"></i> Master</a></li>
-                                    <li><a href="support.html"><i class="fa-solid fa-sliders"></i> Support</a></li>
+                                    <li><a href="{{route('admin.frontend')}}"><i class="fa fa-user"></i> Admin</a></li>
+                                    <li><a href="{{route('subadmin.frontend')}}"><i class="fa fa-user"></i> Sub Admin</a></li>
+                                    <li><a href="{{route('super.frontend')}}"><i class="fa fa-user"></i> Super</a></li>
+                                    <li><a href="{{route('master.frontend')}}"><i class="fa fa-user"></i> Master</a></li>
+                                    <li><a href="{{route('customer.frontend')}}"><i class="fa-solid fa-sliders"></i> Support</a></li>
                                 </ul>
                             </div>
                         </nav>
@@ -57,16 +56,38 @@
                                 <nav>
                                     <div class="main_menu">
                                         <ul>
-                                            <li><a href="index.html"><i class="fa fa-home"></i> Home</a></li>
-                                            <li><a href="admin.html"><i class="fa fa-user"></i> Admin</a></li>
-                                            <li><a href="subadmin.html"><i class="fa fa-user"></i> Sub Admin</a>
+                                            <li>
+                                                <a href="{{ url('/') }}" class="{{ request()->is('/') ? 'active' : '' }}">
+                                                    <i class="fa fa-home"></i> Home
+                                                </a>
                                             </li>
-                                            <li><a href="super.html"><i class="fa fa-user"></i> Super</a></li>
-                                            <li><a href="master.html"><i class="fa fa-user"></i> Master</a></li>
-                                            <li><a href="support.html"><i class="fa-solid fa-sliders"></i>
-                                                    Support</a></li>
+                                            <li>
+                                                <a href="{{ route('admin.frontend') }}" class="{{ request()->is('admin') ? 'active' : '' }}">
+                                                    <i class="fa fa-user"></i> Admin
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('subadmin.frontend') }}" class="{{ request()->is('sub-admin') ? 'active' : '' }}">
+                                                    <i class="fa fa-user"></i> Sub Admin
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('super.frontend') }}" class="{{ request()->is('super') ? 'active' : '' }}">
+                                                    <i class="fa fa-user"></i> Super
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('master.frontend') }}" class="{{ request()->is('master') ? 'active' : '' }}">
+                                                    <i class="fa fa-user"></i> Master
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('customer.frontend') }}" class="{{ request()->is('customer') ? 'active' : '' }}">
+                                                    <i class="fa-solid fa-sliders"></i> Support
+                                                </a>
+                                            </li>
                                         </ul>
-                                    </div>
+                                    </div>                                                                       
                                 </nav>
                             </div>
                         </div>
@@ -81,7 +102,8 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-                                    <form action="">
+                                    <form action="{{ route('search') }}" method="POST">
+                                        @csrf
                                         <div class="modal-body">
                                             <div class="form-group">
                                                 <label for="type"><b>Type</b></label>
@@ -94,19 +116,17 @@
                                             </div>
                                             <div class="form-group mt-2">
                                                 <label for="agent"><b>Search By Agent ID</b></label>
-                                                <input type="text" id="agent" placeholder="Agent ID Number"
-                                                    class="form-control">
+                                                <input type="text" id="agent" name="agent" placeholder="Agent ID Number" class="form-control">
                                             </div>
                                             <div class="form-group mt-2">
                                                 <label for="whatsapp"><b>Search By WhatsApp</b></label>
-                                                <input type="text" id="whatsapp" placeholder="WhatsApp Number"
-                                                    class="form-control">
+                                                <input type="text" id="whatsapp" name="whatsapp" placeholder="WhatsApp Number" class="form-control">
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn">Save changes</button>
+                                            <button type="submit" class="btn">Search</button>
                                         </div>
-                                    </form>
+                                    </form>                                     
                                 </div>
                             </div>
                         </div>

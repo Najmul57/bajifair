@@ -34,10 +34,10 @@ class MasterAgentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'superagent_id' => 'required|exists:super_agents,id',
-            'master_agent_id' => 'required|numeric',
+            'superagent_id' => 'required',
+            'master_agent_id' => 'required|numeric|unique:master_agents,master_agent_id',
             'master_agent_name' => 'required',
-            'whatsapp' => 'required|numeric|unique:subadmins,whatsapp',
+            'whatsapp' => 'required|numeric|unique:master_agents,whatsapp',
         ]);
 
 
@@ -48,7 +48,11 @@ class MasterAgentController extends Controller
             'whatsapp' => $request->whatsapp,
         ]);
 
-        return redirect()->back()->with('success', 'Record created successfully!');
+        $notification = [
+            'message' => 'Master Agent Insert Success!',
+            'alert-type' => 'success'
+        ];
+        return redirect()->back()->with($notification);
     }
 
 
@@ -62,12 +66,12 @@ class MasterAgentController extends Controller
 
     public function update(Request $request, MasterAgent $masterAgent)
     {
-        $request->validate([
-            'superagent_id' => 'required|numeric|exists:super_agents,id', // Assumes superagent_id is an ID
-            'master_agent_name' => 'required|string',
-            'master_agent_id' => 'required|numeric|unique:master_agents,master_agent_id,' . $masterAgent->id,
-            'whatsapp' => 'required|numeric|unique:master_agents,whatsapp,' . $masterAgent->id,
-        ]);
+        // $request->validate([
+        //     'superagent_id' => 'required|numeric|exists:super_agents,id', // Assumes superagent_id is an ID
+        //     'master_agent_name' => 'required|string',
+        //     'master_agent_id' => 'required|numeric|unique:master_agents,master_agent_id,' . $masterAgent->id,
+        //     'whatsapp' => 'required|numeric|unique:master_agents,whatsapp,' . $masterAgent->id,
+        // ]);
     
         $masterAgent->update([
             'superagent_id' => $request->superagent_id,
@@ -76,12 +80,21 @@ class MasterAgentController extends Controller
             'whatsapp' => $request->whatsapp,
         ]);
     
-        return redirect()->back()->with('success', 'Master Agent updated successfully!');
+        $notification = [
+            'message' => 'Master Agent Insert Success!',
+            'alert-type' => 'success'
+        ];
+        return redirect()->back()->with($notification);
     }
  
     public function destroy(MasterAgent $masterAgent)
     {
         $masterAgent->delete();
-        return redirect()->back()->with('success', 'Record deleted successfully!');
+        
+        $notification = [
+            'message' => 'Master Agent Insert Success!',
+            'alert-type' => 'success'
+        ];
+        return redirect()->back()->with($notification);
     }
 }

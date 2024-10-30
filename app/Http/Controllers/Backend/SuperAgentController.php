@@ -35,10 +35,10 @@ class SuperAgentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'admin_id' => 'required|exists:admins,id',
-            'super_agent_id' => 'required|numeric',
+            'admin_id' => 'required',
+            'super_agent_id' => 'required|numeric|unique:super_agents,super_agent_id',
             'super_agent_name' => 'required',
-            'whatsapp' => 'required|numeric|unique:subadmins,whatsapp',
+            'whatsapp' => 'required|numeric|unique:super_agents,whatsapp',
         ]);
 
 
@@ -49,7 +49,11 @@ class SuperAgentController extends Controller
             'whatsapp' => $request->whatsapp,
         ]);
 
-        return redirect()->back()->with('success', 'Record created successfully!');
+        $notification = [
+            'message' => 'Super Agent Insert Success!',
+            'alert-type' => 'success'
+        ];
+        return redirect()->back()->with($notification);
     }
 
 
@@ -62,12 +66,12 @@ class SuperAgentController extends Controller
 
     public function update(Request $request, SuperAgent $superAgent)
     {
-        $request->validate([
-            'super_agent_id' => 'required|numeric|unique:super_agents,super_agent_id,' . $superAgent->id,
-            'super_agent_name' => 'required|string',
-            'admin_id' => 'required|exists:admins,id',
-            'whatsapp' => 'required|numeric|unique:super_agents,whatsapp,' . $superAgent->id,
-        ]);
+        // $request->validate([
+        //     'super_agent_id' => 'required|numeric|unique:super_agents,super_agent_id,' . $superAgent->id,
+        //     'super_agent_name' => 'required|string',
+        //     'admin_id' => 'required|exists:admins,id',
+        //     'whatsapp' => 'required|numeric|unique:super_agents,whatsapp,' . $superAgent->id,
+        // ]);
 
         $superAgent->update([
             'admin_id' => $request->admin_id,
@@ -76,14 +80,33 @@ class SuperAgentController extends Controller
             'whatsapp' => $request->whatsapp,
         ]);
 
-        return redirect()->back()->with('success', 'Super Agent updated successfully!');
+        $notification = [
+            'message' => 'Super Agent Update Success!',
+            'alert-type' => 'success'
+        ];
+        return redirect()->back()->with($notification);
     }
 
 
 
     public function destroy(SuperAgent $superAgent)
     {
+        // Check if there are related MasterAgents
+        if ($superAgent->masterAgents()->count() > 0) {
+            $notification = [
+                'message' => 'Cannot delete Super Agent. There are related Master Agents.',
+                'alert-type' => 'error'
+            ];
+            return redirect()->back()->with($notification);
+        }
+    
         $superAgent->delete();
-        return redirect()->back()->with('success', 'Record deleted successfully!');
+    
+        $notification = [
+            'message' => 'Super Agent Delete Success!',
+            'alert-type' => 'success'
+        ];
+        return redirect()->back()->with($notification);
     }
+    
 }

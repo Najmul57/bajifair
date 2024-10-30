@@ -35,9 +35,7 @@ class SettingsController extends Controller
             'updated_at' => Carbon::now(),
         ];
     
-        // Handle logo upload
         if ($request->file('logo')) {
-            // Check if the existing logo file exists, then delete it
             if ($existingSetting->logo && file_exists(public_path('upload/logo/' . $existingSetting->logo))) {
                 unlink(public_path('upload/logo/' . $existingSetting->logo));
             }
@@ -48,9 +46,7 @@ class SettingsController extends Controller
             $setting['logo'] = $logoFilename;
         }
     
-        // Handle favicon upload
         if ($request->file('favicon')) {
-            // Check if the existing favicon file exists, then delete it
             if ($existingSetting->favicon && file_exists(public_path('upload/favicon/' . $existingSetting->favicon))) {
                 unlink(public_path('upload/favicon/' . $existingSetting->favicon));
             }
@@ -61,11 +57,14 @@ class SettingsController extends Controller
             $setting['favicon'] = $faviconFilename;
         }
     
-        // Update the settings record in the database
         DB::table('settings')->where('id', $id)->update($setting);
     
-        // Redirect back to the settings page with a success message
-        return redirect()->back()->with('success', 'Settings updated successfully!');
+
+        $notification = [
+            'message' => 'Settings updated Success!',
+            'alert-type' => 'success'
+        ];
+        return redirect()->back()->with($notification);
     }
     
     

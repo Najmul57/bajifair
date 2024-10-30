@@ -18,16 +18,19 @@ class QuickMasterController extends Controller
 
     public function index()
     {
-        $data = $this->quickMaster::select('master_id', 'whatsapp','id')->latest()->get();
-    
+        $data = $this->quickMaster::select('master_id', 'whatsapp', 'id')->latest()->get();
+
         return view('admin.pages.quick-master.index', compact('data'));
     }
-    
+
     public function store(Request $request)
     {
         $request->validate([
             'master_id' => 'required|numeric|unique:quick_masters,master_id',
             'whatsapp' => 'required|numeric|unique:quick_masters,whatsapp',
+        ], [
+            'master_id.unique' => 'A record with this Master ID already exists.',
+            'whatsapp.unique' => 'A record with this WhatsApp number already exists.',
         ]);
     
         $data = $this->quickMaster::create([
@@ -35,36 +38,46 @@ class QuickMasterController extends Controller
             'whatsapp' => $request->whatsapp,
         ]);
     
-        return redirect()->back()->with('success', 'Record created successfully!');
+        $notification = [
+            'message' => 'Quick Master Insert Success!',
+            'alert-type' => 'success'
+        ];
+        return redirect()->back()->with($notification);
     }
     
-
     public function edit(QuickMaster $quickMaster)
     {
         return response()->json($quickMaster);
     }
-    
+
     public function update(Request $request, QuickMaster $quickMaster)
     {
-        $request->validate([
-            'master_id' => 'required|numeric|unique:quick_masters,master_id,' . $quickMaster->id,
-            'whatsapp' => 'required|numeric|unique:quick_masters,whatsapp,' . $quickMaster->id,
-        ]);
-    
+        // $request->validate([
+        //     'master_id' => 'required|numeric|unique:quick_masters,master_id,' . $quickMaster->id,
+        //     'whatsapp' => 'required|numeric|unique:quick_masters,whatsapp,' . $quickMaster->id,
+        // ]);
+
         $quickMaster->update([
             'master_id' => $request->master_id,
             'whatsapp' => $request->whatsapp,
         ]);
-    
-        return redirect()->back()->with('success', 'Record updated successfully!');
+
+        $notification = [
+            'message' => 'Quick Master Update Success!',
+            'alert-type' => 'success'
+        ];
+        return redirect()->back()->with($notification);
     }
-    
-    
+
+
 
     public function destroy(QuickMaster $quickMaster)
     {
         $quickMaster->delete();
-        return redirect()->back()->with('success', 'Record deleted successfully!');
-    }    
-    
+        $notification = [
+            'message' => 'Quick Master Delete Success!',
+            'alert-type' => 'success'
+        ];
+        return redirect()->back()->with($notification);
+    }
 }

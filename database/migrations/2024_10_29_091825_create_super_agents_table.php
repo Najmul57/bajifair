@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('super_agents', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('admin_id')->constrained()->onDelete('cascade');
+            $table->foreignId('admin_id');
             $table->string('super_agent_id',50);
             $table->string('super_agent_name',100);
             $table->string('whatsapp',15);

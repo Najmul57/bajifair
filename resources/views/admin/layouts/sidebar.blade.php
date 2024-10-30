@@ -1,13 +1,13 @@
 <aside class="main-sidebar">
     <section class="sidebar">
       <!-- Sidebar user panel -->
-      <div class="user-panel">
-        <div class="pull-left image">
-          <img src="{{asset('backend')}}/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-        </div>
+      <div class="user-panel bajifair">
+        {{-- <div class="pull-left image">
+          <img src="{{asset('upload/logo.logo')}}" class="img-circle" alt="User Image">
+        </div> --}}
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+          <p><span class="hidden-xs">{{ ucwords(auth()->user()->name) }}</span></p>
+          {{-- <a href="#"><i class="fa fa-circle text-success"></i> Online</a> --}}
         </div>
       </div>
       <hr>
@@ -51,6 +51,7 @@
           <a href="{{route('customer')}}">
             <i class="fa fa-users"></i> <span>Customer Service List</span>
           </a>
+        </li>
         </li>
         <li class="treeview">
           <a href="{{route('setting')}}">

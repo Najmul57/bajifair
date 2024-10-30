@@ -346,3 +346,17 @@ marquee {
 /* footer */
 
 /* main content end */
+
+
+.logo img {
+    background: #00a551;
+    padding: 10px;
+    border-radius: 5px;
+}
+nav.menu-bar {
+    padding: 20px 0;
+}
+.main_menu ul li a.active {
+    background-color: #f00; /* Example color */
+    color: #fff;
+}

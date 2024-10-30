@@ -3,4 +3,21 @@
 </svg> --}}
 
 
-<img src="{{asset('frontend/images/logo.png')}}" alt="">
+{{-- <img src="{{asset('frontend/images/logo.png')}}" alt=""> --}}
+<style>
+    img.login-Page {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    width: 200px;
+    background: #00A551;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+</style>
+@php
+    $logo = \App\Models\Setting::select('logo')->first();
+@endphp
+@if ($logo && $logo->logo)
+    <img src="{{ asset('upload/logo/' . $logo->logo) }}" alt="" class="login-Page">
+@else
+@endif

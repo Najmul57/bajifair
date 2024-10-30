@@ -1,16 +1,40 @@
 @extends('admin.layouts.master')
 
 @section('admin_content')
-    <style>
-        button.close span {
-            color: #00A551;
-        }
+<style>
+    button.close span {
+        color: #00A551;
+    }
 
-        button.close {
-            opacity: 1;
-            font-size: 30px;
-        }
-    </style>
+    button.close {
+        opacity: 1;
+        font-size: 30px;
+    }
+
+    div#error-alert {
+        text-align: center;
+        width: 400px;
+        margin-bottom: 0;
+        position: relative;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+
+    div#error-alert ul li {
+        list-style: none;
+    }
+</style>
+
+@if ($errors->any())
+    <div class="alert alert-danger" id="error-alert">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
     <div class="page_header" style="display: flex; align-items: center;justify-content: space-between;">
         <h2>Admin List</h2>
@@ -22,7 +46,7 @@
             <thead style="background: #00A551;color:#fff">
                 <tr>
                     <th>SL</th>
-                    <th>Quick Master ID No. </th>
+                    <th>Admin Name </th>
                     <th>WhatsApp Number </th>
                     <th>Action</th>
                 </tr>
@@ -71,7 +95,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="whatsapp">Whatsapp Number</label>
-                                            <input type="number" name="whatsapp" id="whatsapp" class="form-control" required value="{{ $item->whatsapp }}">
+                                            <input type="number" name="whatsapp" id="whatsapp" minlength="11"  class="form-control" required value="{{ $item->whatsapp }}">
                                         </div>
                                         <div style="text-align: end">
                                             <button type="submit" class="btn btn-success">Update</button>
@@ -107,7 +131,7 @@
                         </div>
                         <div class="form-group">
                             <label for="whatsapp">Whatsapp Number</label>
-                            <input type="number" name="whatsapp" id="whatsapp" class="form-control" required
+                            <input type="number" name="whatsapp" id="whatsapp" minlength="11"  class="form-control" required
                                 placeholder="Whatsapp Number">
                         </div>
                         <div style="text-align: end">
@@ -118,4 +142,13 @@
             </div>
         </div>
     </div>
+
+    <script>
+        setTimeout(function() {
+            var errorAlert = document.getElementById('error-alert');
+            if (errorAlert) {
+                errorAlert.style.display = 'none';
+            }
+        }, 4000);
+    </script>
 @endsection
